@@ -1,10 +1,10 @@
 ---
 
-#- name: "Install | Setup Netdata"
-#  include: "netdata.yml"
+- name: "Install | Setup Netdata"
+  include: "netdata.yml"
 
-#- name: "Install | Setup Fpm"
-#  include: fpm.yml
+- name: "Install | Setup Fpm"
+  include: fpm.yml
 
 - name: "Create RPM package"
   include: rpm.yml

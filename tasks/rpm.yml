@@ -1,2 +1,22 @@
 ---
 
+- name: "copy templates"
+  template:
+    src: "{{ item }}"
+    dest: /tmp
+  with_items:
+     - "{{ templates }}"
+
+- name: "Buil RPM package"
+  command: fpm -s dir -t rpm -n "netdata" -v {{ ntd_version }} --iteration {{ iteration }} \
+      --after-install '/tmp/netdata.sh' --after-remove '/tmp/netdata-uninstaller.sh' \
+      --description 'Netdata RPM for Intelligent Contacts' --url http://intelligentcontacts.com/ \
+      --license "none" --vendor none /usr/sbin/netdata /etc/rc.d/init.d/netdata /var/log/netdata \
+      /etc/logrotate.d/netdata /etc/netdata /usr/share/netdata /usr/libexec/netdata /var/cache/netdata /var/lib/netdata
+  args:
+    chdir: /tmp
+    
+- name: "Copy RPM local"
+  fetch:
+    src: /tmp/netdata-{{ ntd_version }}-{{ iteration }}.x86_64.rpm
+    dest: /tmp/RPM

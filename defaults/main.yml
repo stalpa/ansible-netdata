@@ -20,10 +20,10 @@ netdata_packages:
     - PyYAML
     - zlib-devel
 
-# Netdata version
+# Netdata parameters
 #
 ntd_version: 1.7.0
-
+iteration: 1.1
 
 # => Instruction: http://fpm.readthedocs.io/en/latest/installing.html
 #
@@ -33,3 +33,9 @@ fpm_packages:
     - make
     - rpm-build
     - rubygems
+
+# Templates
+#
+templates:
+   - netdata.sh
+   - netdata-uninstaller.sh

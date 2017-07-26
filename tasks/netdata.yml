@@ -1,4 +1,5 @@
 ---
+
 - name: "Install pre-requisites for Netdata"    
   yum:
     name: "{{ item }}"
