@@ -19,4 +19,6 @@
 - name: "Copy RPM local"
   fetch:
     src: /tmp/netdata-{{ ntd_version }}-{{ iteration }}.x86_64.rpm
-    dest: /tmp/RPM
+    dest: /tmp/netdata-{{ ntd_version }}-{{ iteration }}.x86_64.rpm
+    flat: yes
+
