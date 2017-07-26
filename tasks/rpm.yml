@@ -16,7 +16,7 @@
   args:
     chdir: /tmp
     
-- name: "Copy RPM local"
+- name: "Get RPM"
   fetch:
     src: /tmp/netdata-{{ ntd_version }}-{{ iteration }}.x86_64.rpm
     dest: /tmp/netdata-{{ ntd_version }}-{{ iteration }}.x86_64.rpm
