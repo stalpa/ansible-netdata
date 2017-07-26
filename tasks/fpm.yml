@@ -1,0 +1,20 @@
+---
+- name: "Install pre-requisites for FPM"
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - "{{ fpm_packages }}"
+
+- name: "install ffi for ruby"
+  command: gem inst ffi --platform ruby
+
+- name: "Install Fpm with the gem"
+  command: gem install --no-ri --no-rdoc fpm
+
+- name: "Create link for Fpm"
+  command: ln -s /usr/local/bin/fpm /bin/fpm
+
+# Uninstall
+# gem uninst ffi

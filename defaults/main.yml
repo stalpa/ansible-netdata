@@ -1,0 +1,35 @@
+# => Instruction: https://github.com/firehol/netdata/wiki/Installation
+#
+# 0. Prepare your system
+#
+netdata_packages:
+    - epel-release
+    - autoconf
+    - automake
+    - curl
+    - gcc
+    - git
+    - libmnl-devel
+    - libuuid-devel
+    - make
+    - MySQL-python
+    - nc
+    - pkgconfig
+    - python
+    - python-psycopg2
+    - PyYAML
+    - zlib-devel
+
+# Netdata version
+#
+ntd_version: 1.7.0
+
+
+# => Instruction: http://fpm.readthedocs.io/en/latest/installing.html
+#
+fpm_packages:
+    - ruby-devel
+    - gcc
+    - make
+    - rpm-build
+    - rubygems

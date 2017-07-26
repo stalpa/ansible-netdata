@@ -1,0 +1,4 @@
+---
+# handlers file for netdata
+- name: "kill netdata"
+  command: killall netdata

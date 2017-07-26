@@ -1,0 +1,42 @@
+---
+- name: "Install pre-requisites for Netdata"    
+  yum:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes  
+  with_items: 
+    - "{{ netdata_packages }}"
+
+- name: "Download Netdata Archive"
+  get_url:
+    url: https://github.com/firehol/netdata/archive/v{{ ntd_version }}.zip
+    dest: /tmp/
+    mode: 0440
+
+- name: "ATTENTION!!! Delete old netdata extract files"
+  shell: rm -rf /tmp/netdata-{{ ntd_version }}
+  args:
+     warn: no
+
+- name: "Extract Netdata Archive" 
+  command: 'unzip /tmp/netdata-{{ ntd_version }}.zip -d /tmp' 
+
+- name: "Installation"
+  command: ./netdata-installer.sh --dont-wait --libs-are-really-here
+  args:
+    chdir: /tmp/netdata-{{ ntd_version }}
+  notify: "kill netdata"
+
+- name: "startup file"
+  command: cp system/netdata-init-d /etc/init.d/netdata
+  args:
+    chdir: /tmp/netdata-{{ ntd_version }}
+
+- name: "Enable autorun"
+  service:
+    name: netdata
+    enabled: yes
+    state: started
+
+- name: "make sure it is executable"
+  command: chmod +x /etc/init.d/netdata
